@@ -169,27 +169,154 @@ header{
 .skills-box li:first-child{ border-top: none; }
 .skills-box li::before{ content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
-.work-row{
-  display: grid; grid-template-columns: 40px 2fr 1fr; align-items: center; gap: 20px;
-  padding: 26px 0; border-bottom: 1px solid rgba(0,0,0,0.1); position: relative; cursor: pointer;
-}
-.work-index{ font-size: 0.85rem; color: var(--gray); font-variant-numeric: tabular-nums; }
-.work-name{
-  font-family: var(--display); font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 600;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
-}
-.work-row:hover .work-name{ transform: translateX(12px); color: var(--green); }
-.work-type{ font-size: 0.92rem; color: var(--gray); text-align: right; }
-.work-preview{
-  position: absolute; right: 0; top: 50%; width: 220px; height: 150px;
-  transform: translateY(-50%) translateX(20px) scale(0.94);
-  border-radius: 4px; overflow: hidden; opacity: 0; pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 5; box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-}
-.work-preview img{ width: 100%; height: 100%; object-fit: cover; display: block; }
-.work-row:hover .work-preview{ opacity: 1; transform: translateY(-50%) translateX(0) scale(1); }
+/* (legacy list-row styles removed — projects now use the filterable grid above) */
 .works-list{ padding-bottom: 100px; }
+
+/* ---------- Projects: filter + grid + modal ---------- */
+.inner-hero-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filter-tabs{ display: flex; gap: 26px; flex-wrap: wrap; padding-bottom: 8px; }
+
+.filter-btn{
+  background: none; border: none; cursor: pointer;
+  font-family: var(--body); font-size: 0.92rem; color: var(--gray);
+  padding: 4px 0; border-bottom: 2px solid transparent;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.filter-btn:hover{ color: var(--ink); }
+.filter-btn.is-active{ color: var(--green); border-color: var(--green); font-weight: 600; }
+
+.filter-toggle{
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px;
+  background: var(--card); border: 1px solid rgba(0,0,0,0.1); border-radius: 50%;
+  cursor: pointer; align-items: center;
+}
+.filter-toggle span{ display: block; width: 14px; height: 2px; background: var(--ink); }
+
+.project-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding-bottom: 110px;
+}
+
+.project-card{
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #111;
+}
+
+.project-card img{
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover img{ transform: scale(1.06); }
+
+.project-card-overlay{
+  position: absolute; inset: 0;
+  background: rgba(10,15,10,0.35);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.project-card:hover .project-card-overlay,
+.project-card:focus-visible .project-card-overlay{ opacity: 1; }
+
+.project-card-overlay span{
+  font-family: var(--display); font-weight: 600; color: #fff;
+  font-size: 1.15rem; letter-spacing: 0.02em; text-align: center; padding: 0 20px;
+}
+
+.project-card.is-hidden{ display: none; }
+
+/* Small-window filter overlay (matches the reference site's mobile category list) */
+.filter-overlay{
+  position: fixed; inset: 0; z-index: 400;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.filter-overlay.is-open{ opacity: 1; visibility: visible; }
+
+.filter-overlay-close{
+  position: absolute; top: 22px; right: 22px;
+  background: none; border: none; font-size: 1.8rem; line-height: 1;
+  color: var(--ink); cursor: pointer;
+}
+
+.filter-overlay nav{ display: flex; flex-direction: column; gap: 22px; text-align: center; }
+
+.filter-link{
+  font-family: var(--body); font-size: 1.2rem; color: var(--gray);
+  transition: color 0.25s ease;
+}
+
+.filter-link.is-active{ color: var(--green); font-weight: 600; }
+.filter-link:hover{ color: var(--ink); }
+
+/* Project detail modal */
+.project-modal{
+  position: fixed; inset: 0; z-index: 400;
+  background: var(--bg);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  overflow: hidden;
+}
+
+.project-modal.is-open{ opacity: 1; visibility: visible; }
+
+.modal-scroll{ height: 100%; overflow-y: auto; }
+
+.modal-close{
+  position: fixed; top: 22px; right: 24px; z-index: 410;
+  background: var(--card); border: 1px solid rgba(0,0,0,0.1); border-radius: 50%;
+  width: 40px; height: 40px; font-size: 1.4rem; line-height: 1;
+  color: var(--ink); cursor: pointer;
+}
+
+.modal-content{ max-width: 1000px; margin: 0 auto; padding: 90px 32px 100px; }
+
+.modal-image{
+  width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 6px; margin-bottom: 40px;
+}
+.modal-image img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.modal-info h2{
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 14px;
+}
+
+.modal-meta{
+  display: flex; flex-wrap: wrap; gap: 6px 26px;
+  font-size: 0.92rem; color: var(--green); font-weight: 600;
+  margin-bottom: 28px;
+}
+
+.modal-meta span span{ color: var(--gray); font-weight: 400; }
+
+.modal-desc{ font-size: 1.05rem; max-width: 68ch; color: var(--text); }
+
+@media (max-width: 700px){
+  .filter-tabs{ display: none; }
+  .filter-toggle{ display: flex; }
+  .project-grid{ grid-template-columns: 1fr; }
+}
 
 .contact-box{
   background: var(--card); border: 1px solid rgba(0,0,0,0.08); border-radius: 8px;
@@ -207,9 +334,6 @@ footer{ background: var(--footer-bg); color: #9aa39c; padding: 30px 0; text-alig
 
 @media (max-width: 820px){
   .about-grid, .contact-box{ grid-template-columns: 1fr; gap: 28px; }
-  .work-row{ grid-template-columns: 26px 1fr; row-gap: 6px; }
-  .work-type{ grid-column: 2; text-align: left; }
-  .work-preview{ display: none; }
   .contact-box{ padding: 32px 24px; }
   .view-inner{ padding-top: 110px; }
 }

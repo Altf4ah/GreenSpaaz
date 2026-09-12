@@ -76,38 +76,100 @@
 <!-- PROJECTS: separate full page -->
 <section class="view" data-view="work">
   <div class="view-inner wrap">
-    <div class="inner-hero">
-      <div class="section-label">Projects</div>
-      <h1>Selected work</h1>
+    <div class="inner-hero inner-hero-row">
+      <div>
+        <div class="section-label">Projects</div>
+        <h1>Selected work</h1>
+      </div>
+
+      <!-- Desktop filter tabs -->
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-btn is-active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="residential">Residential</button>
+        <button class="filter-btn" data-filter="interiors">Interiors</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+      </div>
+
+      <!-- Small-window filter toggle -->
+      <button class="filter-toggle" id="filterToggle" aria-label="Open filters">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="works-list">
-      <div class="work-row" tabindex="0">
-        <span class="work-index">01</span>
-        <span class="work-name">Modern Villa in Kerala</span>
-        <span class="work-type">Residential</span>
-        <div class="work-preview"><img src="assets/project1.jpg" alt="Modern Villa in Kerala"></div>
+
+    <div class="project-grid" id="projectGrid">
+
+      <div class="project-card" data-category="residential" tabindex="0"
+           data-title="Modern Villa in Kerala"
+           data-client="Private Client"
+           data-location="Kochi, Kerala"
+           data-img="assets/project1.jpg"
+           data-desc="Designed as a quiet retreat from the city, this villa reworks traditional Kerala courtyard living for a modern family. Deep overhangs and cross-ventilated volumes keep the interiors cool through the monsoon and the peak of summer alike, while a central water-linked courtyard brings light and calm into every room around it. Laterite, exposed brick and reclaimed teak carry the material palette, grounding the house firmly in its region rather than in a generic modern language.">
+        <img src="assets/project1.jpg" alt="Modern Villa in Kerala">
+        <div class="project-card-overlay"><span>Modern Villa in Kerala</span></div>
       </div>
-      <div class="work-row" tabindex="0">
-        <span class="work-index">02</span>
-        <span class="work-name">Urban Apartment Design</span>
-        <span class="work-type">Residential</span>
-        <div class="work-preview"><img src="assets/project2.jpg" alt="Urban Apartment Design"></div>
+
+      <div class="project-card" data-category="residential" tabindex="0"
+           data-title="Urban Apartment Design"
+           data-client="Private Developer"
+           data-location="Kochi, Kerala"
+           data-img="assets/project2.jpg"
+           data-desc="A mid-rise residential block planned around light and air rather than unit count alone. Recessed balconies and planted terraces break up the massing and give every apartment usable outdoor space, while shared courtyards at ground level knit the building into a small community rather than a row of sealed units. The facade is tuned to cut direct heat gain without closing the building off from the street.">
+        <img src="assets/project2.jpg" alt="Urban Apartment Design">
+        <div class="project-card-overlay"><span>Urban Apartment Design</span></div>
       </div>
-      <div class="work-row" tabindex="0">
-        <span class="work-index">03</span>
-        <span class="work-name">Minimalist Interior Concept</span>
-        <span class="work-type">Interior</span>
-        <div class="work-preview"><img src="assets/project3.jpg" alt="Minimalist Interior Concept"></div>
+
+      <div class="project-card" data-category="interiors" tabindex="0"
+           data-title="Minimalist Interior Concept"
+           data-client="Private Client"
+           data-location="Kochi, Kerala"
+           data-img="assets/project3.jpg"
+           data-desc="An interior fit-out built around restraint: a narrow material palette of natural wood, lime-washed walls and stone, left uncluttered so daily life fills the space rather than furniture doing it. Storage is built into the architecture itself, keeping surfaces clear, and openings are placed to track the sun through the day so artificial lighting is barely needed until evening.">
+        <img src="assets/project3.jpg" alt="Minimalist Interior Concept">
+        <div class="project-card-overlay"><span>Minimalist Interior Concept</span></div>
       </div>
-      <div class="work-row" tabindex="0">
-        <span class="work-index">04</span>
-        <span class="work-name">Facade Study</span>
-        <span class="work-type">Commercial</span>
-        <div class="work-preview"><img src="assets/facade-study.jpg" alt="Facade study"></div>
+
+      <div class="project-card" data-category="commercial" tabindex="0"
+           data-title="Facade Study"
+           data-client="Commercial Client"
+           data-location="Kochi, Kerala"
+           data-img="assets/facade-study.jpg"
+           data-desc="A study for a commercial block facade, exploring how a faceted, angular skin can cut solar heat gain while giving an otherwise ordinary office volume a distinct identity from the street. Two contrasting claddings are layered against each other to read differently through the day, catching flat morning light and deep shadow by late afternoon.">
+        <img src="assets/facade-study.jpg" alt="Facade study">
+        <div class="project-card-overlay"><span>Facade Study</span></div>
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- Small-window filter overlay -->
+<div class="filter-overlay" id="filterOverlay">
+  <button class="filter-overlay-close" id="filterOverlayClose" aria-label="Close filters">&times;</button>
+  <nav>
+    <a href="#" data-filter="all" class="filter-link is-active">All</a>
+    <a href="#" data-filter="residential" class="filter-link">Residential</a>
+    <a href="#" data-filter="interiors" class="filter-link">Interiors</a>
+    <a href="#" data-filter="commercial" class="filter-link">Commercial</a>
+  </nav>
+</div>
+
+<!-- Project detail modal -->
+<div class="project-modal" id="projectModal">
+  <button class="modal-close" id="modalClose" aria-label="Close project">&times;</button>
+  <div class="modal-scroll">
+    <div class="modal-content">
+      <div class="modal-image"><img id="modalImg" src="" alt=""></div>
+      <div class="modal-info">
+        <h2 id="modalTitle"></h2>
+        <p class="modal-meta">
+          <span>Client: <span id="modalClient"></span></span>
+          <span>Location: <span id="modalLocation"></span></span>
+        </p>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- CONTACT: separate full page -->
 <section class="view" data-view="contact">
