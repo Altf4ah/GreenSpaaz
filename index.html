@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GREENSPANZ | Althaf Ahmed — Architecture Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+<header id="siteHeader">
+  <div class="brand" data-nav="home">
+    <img src="assets/logo.png" alt="GREENSPANZ logo">
+    <div class="brand-name"><span class="g">GREEN</span><span class="s">SPANZ</span></div>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+  <nav>
+    <a href="#" data-nav="home" class="menu-link is-current">Home</a>
+    <a href="#" data-nav="about" class="menu-link">About</a>
+    <a href="#" data-nav="work" class="menu-link">Projects</a>
+    <a href="#" data-nav="contact" class="menu-link">Contact</a>
+  </nav>
+</div>
+
+<!-- HOME: full-screen carousel, nothing else on the page -->
+<section class="view view-home is-active" data-view="home">
+  <div class="hero">
+    <div class="slide is-active"><img src="assets/project1.jpg" alt="Modern villa exterior at dusk"></div>
+    <div class="slide"><img src="assets/project2.jpg" alt="Apartment tower under construction"></div>
+    <div class="slide"><img src="assets/project3.jpg" alt="Looking up at building facades"></div>
+    <div class="slide"><img src="assets/facade-study.jpg" alt="Modern building facade detail"></div>
+
+    <button class="hero-arrow prev" id="prevBtn" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button class="hero-arrow next" id="nextBtn" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+
+    <div class="hero-dots" id="heroDots"></div>
+  </div>
+</section>
+
+<!-- ABOUT: separate full page, reached only via the menu -->
+<section class="view" data-view="about">
+  <div class="view-inner wrap">
+    <div class="inner-hero">
+      <div class="section-label">About</div>
+      <h1>Minimal, sustainable, emotionally resonant spaces</h1>
+    </div>
+    <div class="about-grid">
+      <p>I am an architect with a deep passion for creating minimal, sustainable, and emotionally resonant spaces. My approach blends modern aesthetics with practical functionality to create timeless environments.</p>
+      <div class="skills-box">
+        <h3>Skills</h3>
+        <ul>
+          <li>Sustainable Design</li>
+          <li>3D Visualization</li>
+          <li>AutoCAD / Revit / SketchUp</li>
+          <li>Project Planning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS: separate full page -->
+<section class="view" data-view="work">
+  <div class="view-inner wrap">
+    <div class="inner-hero">
+      <div class="section-label">Projects</div>
+      <h1>Selected work</h1>
+    </div>
+    <div class="works-list">
+      <div class="work-row" tabindex="0">
+        <span class="work-index">01</span>
+        <span class="work-name">Modern Villa in Kerala</span>
+        <span class="work-type">Residential</span>
+        <div class="work-preview"><img src="assets/project1.jpg" alt="Modern Villa in Kerala"></div>
+      </div>
+      <div class="work-row" tabindex="0">
+        <span class="work-index">02</span>
+        <span class="work-name">Urban Apartment Design</span>
+        <span class="work-type">Residential</span>
+        <div class="work-preview"><img src="assets/project2.jpg" alt="Urban Apartment Design"></div>
+      </div>
+      <div class="work-row" tabindex="0">
+        <span class="work-index">03</span>
+        <span class="work-name">Minimalist Interior Concept</span>
+        <span class="work-type">Interior</span>
+        <div class="work-preview"><img src="assets/project3.jpg" alt="Minimalist Interior Concept"></div>
+      </div>
+      <div class="work-row" tabindex="0">
+        <span class="work-index">04</span>
+        <span class="work-name">Facade Study</span>
+        <span class="work-type">Commercial</span>
+        <div class="work-preview"><img src="assets/facade-study.jpg" alt="Facade study"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT: separate full page -->
+<section class="view" data-view="contact">
+  <div class="view-inner wrap">
+    <div class="inner-hero">
+      <div class="section-label">Contact</div>
+      <h1>Let's collaborate</h1>
+    </div>
+    <div class="contact-box">
+      <h2>Let's talk about your <span class="accent">next project</span></h2>
+      <div class="contact-detail">
+        <div>
+          <div class="label">Email</div>
+          <a href="mailto:greenspanz@gmail.com">greenspanz@gmail.com</a>
+        </div>
+        <div>
+          <div class="label">Instagram</div>
+          <a href="https://instagram.com/greenspanzindia" target="_blank" rel="noopener">@Greenspanzindia</a>
+        </div>
+      </div>
+    </div>
+    <footer style="margin: 0 -32px;">
+      <div class="wrap">&copy; 2025 Althaf Ahmed. All Rights Reserved.</div>
+    </footer>
+  </div>
+</section>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
