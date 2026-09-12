@@ -44,18 +44,27 @@ header{
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  mix-blend-mode: difference;
 }
 
-header.on-light{ color: var(--ink); mix-blend-mode: normal; }
+header.on-light{ color: var(--ink); }
 
 .brand{ display: flex; align-items: center; gap: 10px; cursor: pointer; }
-.brand img{ height: 34px; width: auto; display: block; filter: brightness(0) invert(1); }
+
+.brand img{
+  height: 34px; width: auto; display: block;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,0.55));
+}
 header.on-light .brand img{ filter: none; }
 
-.brand-name{ font-family: var(--display); font-size: 1.15rem; font-weight: 700; }
-.brand-name .g{ color: var(--green); }
-.brand-name .s{ color: currentColor; opacity: 0.75; }
+.brand-name{
+  font-family: var(--display); font-size: 1.15rem; font-weight: 700;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
+}
+header.on-light .brand-name{ text-shadow: none; }
+
+/* GREEN / SPANZ always keep their brand colors, never inherited or blended */
+.brand-name .g{ color: var(--green) !important; }
+.brand-name .s{ color: var(--gray) !important; }
 
 .menu-btn{
   display: flex; flex-direction: column; gap: 6px; width: 28px;
