@@ -7,8 +7,7 @@ const menuLinks = document.querySelectorAll('.menu-link');
 function showView(name) {
   views.forEach(v => v.classList.toggle('is-active', v.dataset.view === name));
   menuLinks.forEach(l => l.classList.toggle('is-current', l.dataset.nav === name));
-  document.body.classList.toggle('view-open', name !== 'home');
-  header.classList.toggle('on-light', name !== 'home');
+  document.documentElement.classList.toggle('view-open', name !== 'home');
   if (name !== 'home') window.scrollTo(0, 0);
   appEl.classList.remove('menu-open');
   menuBtn.setAttribute('aria-expanded', 'false');

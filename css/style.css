@@ -13,9 +13,14 @@
 
 *{ box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body{
+html{
   height: 100%;
   overflow: hidden; /* home view fills the screen, no scroll — like the reference site */
+}
+
+html.view-open{
+  height: auto;
+  overflow-y: auto; /* every other page scrolls normally */
 }
 
 body{
@@ -25,8 +30,6 @@ body{
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-
-body.view-open{ overflow: visible; }
 
 a{ color: inherit; text-decoration: none; }
 ::selection{ background: var(--green); color: #fff; }
@@ -39,40 +42,42 @@ header{
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 300;
-  padding: 26px 32px;
+  padding: 22px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
 }
 
-header.on-light{ color: var(--ink); }
-
-.brand{ display: flex; align-items: center; gap: 10px; cursor: pointer; }
-
-.brand img{
-  height: 34px; width: auto; display: block;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,0.55));
+/* Small banner behind the logo — keeps it visible over any carousel photo
+   and means its colors never depend on what's happening in the header */
+.brand-banner{
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  background: var(--card);
+  padding: 8px 16px 8px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
-header.on-light .brand img{ filter: none; }
+
+.brand-banner img{ height: 30px; width: auto; display: block; }
 
 .brand-name{
-  font-family: var(--display); font-size: 1.15rem; font-weight: 700;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
+  font-family: var(--display); font-size: 1.1rem; font-weight: 700;
 }
-header.on-light .brand-name{ text-shadow: none; }
 
 /* GREEN / SPANZ always keep their brand colors, never inherited or blended */
 .brand-name .g{ color: var(--green) !important; }
 .brand-name .s{ color: var(--gray) !important; }
 
 .menu-btn{
-  display: flex; flex-direction: column; gap: 6px; width: 28px;
-  background: none; border: none; cursor: pointer; padding: 6px 0;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  width: 44px; height: 44px;
+  background: var(--card);
+  border: none; border-radius: 50%; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
 .menu-btn span{
-  display: block; height: 2px; width: 100%; background: currentColor;
+  display: block; height: 2px; width: 16px; background: var(--ink);
   transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
 }
 
