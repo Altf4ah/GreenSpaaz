@@ -75,7 +75,7 @@ Beyond the code, the highest-leverage SEO step for a local studio like this is u
 
 ## The project request form
 
-The "Send a project request" section on the Contact page works with **zero backend and zero signup**: it builds a pre-filled email and hands it to the visitor's own email app via a `mailto:` link addressed to `althafahmed071@gmail.com`.
+The "Send a project request" section on the Contact page works with **zero backend and zero signup**: it builds a pre-filled email and hands it to the visitor's own email app via a `mailto:` link addressed to `greenspanzindia@gmail.com`.
 
 Trade-off: it requires the visitor to have an email app configured (most desktops do; some phones/browsers don't). If you want submissions to land in your inbox without depending on that:
 1. Sign up free at [formspree.io](https://formspree.io) and create a form — you'll get an endpoint like `https://formspree.io/f/xxxxxxxx`.

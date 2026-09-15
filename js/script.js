@@ -177,7 +177,7 @@ document.addEventListener('keydown', (e) => {
 // fetch() POST to your form endpoint, and keep the honeypot field as-is.
 const quoteForm = document.getElementById('quoteForm');
 const quoteStatus = document.getElementById('quoteStatus');
-const STUDIO_EMAIL = 'althafahmed071@gmail.com';
+const STUDIO_EMAIL = 'greenspanzindia@gmail.com';
 
 if (quoteForm) {
   quoteForm.addEventListener('submit', (e) => {
