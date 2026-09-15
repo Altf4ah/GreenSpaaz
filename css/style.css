@@ -43,19 +43,24 @@ header{
   top: 0; left: 0; right: 0;
   z-index: 300;
   padding: 22px 32px;
+}
+
+/* Single continuous banner — logo and menu button now live inside
+   one bar instead of two separate floating shapes */
+.header-bar{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: var(--max);
+  margin: 0 auto;
+  background: var(--card);
+  border-radius: 999px;
+  padding: 8px 10px 8px 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
-/* Small banner behind the logo — keeps it visible over any carousel photo
-   and means its colors never depend on what's happening in the header */
 .brand-banner{
   display: flex; align-items: center; gap: 10px; cursor: pointer;
-  background: var(--card);
-  padding: 8px 18px 8px 8px;
-  border-radius: 999px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
 .brand-banner img{ height: 48px; width: auto; display: block; }
@@ -71,9 +76,8 @@ header{
 .menu-btn{
   display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
   width: 44px; height: 44px;
-  background: var(--card);
+  background: transparent;
   border: none; border-radius: 50%; cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
 .menu-btn span{
@@ -329,6 +333,78 @@ header{
 .contact-detail .label{ font-size: 0.82rem; color: var(--gray); margin-bottom: 2px; }
 .contact-detail a{ font-family: var(--display); font-size: 1.05rem; font-weight: 600; transition: color 0.3s ease; }
 .contact-detail a:hover{ color: var(--green); }
+
+/* ---------- Request a quote form ---------- */
+.quote-box{
+  background: var(--card);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 50px;
+  margin-bottom: 100px;
+}
+
+.quote-box h3{
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  margin-bottom: 10px;
+}
+
+.quote-intro{ font-size: 0.95rem; color: var(--gray); max-width: 60ch; margin-bottom: 30px; }
+.quote-intro strong{ color: var(--text); }
+
+/* Honeypot — visually hidden but present in the DOM/tab order for humans skipped,
+   bots that auto-fill every input tend to fill this and get silently rejected */
+.hp-field{
+  position: absolute;
+  left: -9999px;
+  width: 1px; height: 1px;
+  overflow: hidden;
+}
+
+.form-row{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.form-field{ margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+
+.form-field label{ font-size: 0.85rem; color: var(--gray); }
+
+.form-field input,
+.form-field select,
+.form-field textarea{
+  font-family: var(--body); font-size: 0.98rem; color: var(--text);
+  background: var(--bg);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 4px;
+  padding: 12px 14px;
+  transition: border-color 0.25s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  outline: none;
+  border-color: var(--green);
+}
+
+.form-field textarea{ resize: vertical; }
+
+.quote-submit{
+  font-family: var(--display); font-weight: 600; font-size: 0.98rem;
+  color: #fff; background: var(--green);
+  border: none; border-radius: 999px;
+  padding: 14px 34px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.quote-submit:hover{ background: var(--green-deep, #1f8a4c); transform: translateY(-1px); }
+
+.quote-status{ margin-top: 14px; font-size: 0.9rem; color: var(--green); min-height: 1.2em; }
+.quote-status.is-error{ color: #c0392b; }
+
+@media (max-width: 700px){
+  .form-row{ grid-template-columns: 1fr; }
+  .quote-box{ padding: 32px 24px; }
+}
 
 footer{ background: var(--footer-bg); color: #9aa39c; padding: 30px 0; text-align: center; font-size: 0.86rem; }
 

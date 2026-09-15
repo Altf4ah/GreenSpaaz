@@ -3,26 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GreenSpanzIndia</title>
+<title>GreenSpanzIndia | Architecture &amp; Design Studio, Kochi Kerala</title>
+
+<!-- Core SEO -->
+<meta name="description" content="GreenSpanzIndia is an architecture and design studio in Kochi, Kerala led by Althaf Ahmed, creating minimal, sustainable and climate-responsive residential, interior and commercial spaces.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://greenspanzindia.vercel.app/">
+
+<!-- Open Graph / social previews -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GreenSpanzIndia">
+<meta property="og:title" content="GreenSpanzIndia | Architecture & Design Studio, Kochi Kerala">
+<meta property="og:description" content="Minimal, sustainable and climate-responsive architecture, interiors and commercial design based in Kochi, Kerala.">
+<meta property="og:url" content="https://greenspanzindia.vercel.app/">
+<meta property="og:image" content="https://greenspanzindia.vercel.app/assets/project1.jpg">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GreenSpanzIndia | Architecture & Design Studio, Kochi Kerala">
+<meta name="twitter:description" content="Minimal, sustainable and climate-responsive architecture, interiors and commercial design based in Kochi, Kerala.">
+<meta name="twitter:image" content="https://greenspanzindia.vercel.app/assets/project1.jpg">
+
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Structured data: helps Google understand this is a local architecture business -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "GreenSpanzIndia",
+  "description": "Architecture and design studio creating minimal, sustainable and climate-responsive residential, interior and commercial spaces.",
+  "email": "althafahmed071@gmail.com",
+  "areaServed": "Kochi, Kerala, India",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kochi",
+    "addressRegion": "Kerala",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://instagram.com/greenspanzindia"
+  ]
+}
+</script>
 </head>
 <body>
 
 <div id="app">
 
 <header id="siteHeader">
-  <div class="brand-banner" data-nav="home">
-    <img src="assets/logo.png" alt="GREENSPANZ logo">
-    <div class="brand-name"><span class="g">GREEN</span><span class="s">SPANZ</span></div>
+  <div class="header-bar">
+    <div class="brand-banner" data-nav="home">
+      <img src="assets/logo.png" alt="GREENSPANZ logo">
+      <div class="brand-name"><span class="g">GREEN</span><span class="s">SPANZ</span></div>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
 </header>
 
 <div class="menu-overlay" id="menuOverlay">
@@ -185,14 +228,65 @@
       <div class="contact-detail">
         <div>
           <div class="label">Email</div>
-          <a href="mailto:greenspanz@gmail.com">greenspanz@gmail.com</a>
+          <a href="mailto:althafahmed071@gmail.com">althafahmed071@gmail.com</a>
         </div>
         <div>
           <div class="label">Instagram</div>
-          <a href="https://instagram.com/greenspanzindia" target="_blank" rel="noopener">@Greenspanzindia</a>
+          <a href="https://instagram.com/greenspanzindia" target="_blank" rel="noopener noreferrer">@Greenspanzindia</a>
         </div>
       </div>
     </div>
+
+    <!-- Request a quote: builds a pre-filled email to althafahmed071@gmail.com,
+         no backend required. See README for the optional Formspree upgrade. -->
+    <div class="quote-box">
+      <h3>Send a project request</h3>
+      <p class="quote-intro">Fill this in and it'll open a pre-filled email straight to <strong>althafahmed071@gmail.com</strong> — nothing is stored or sent anywhere else.</p>
+
+      <form id="quoteForm" novalidate>
+        <!-- Honeypot: hidden from real visitors, bots tend to fill every field -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="companySite">Leave this field empty</label>
+          <input type="text" id="companySite" name="companySite" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="qName">Name</label>
+            <input type="text" id="qName" name="qName" required autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="qEmail">Your email</label>
+            <input type="email" id="qEmail" name="qEmail" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="qPhone">Phone (optional)</label>
+            <input type="tel" id="qPhone" name="qPhone" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="qType">Project type</label>
+            <select id="qType" name="qType">
+              <option value="Residential">Residential</option>
+              <option value="Interiors">Interiors</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="qMessage">Tell us about your project</label>
+          <textarea id="qMessage" name="qMessage" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="quote-submit">Send request</button>
+        <p class="quote-status" id="quoteStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
     <footer style="margin: 0 -32px;">
       <div class="wrap">&copy; 2020 Dr. Salahuddin. All Rights Reserved.</div>
     </footer>

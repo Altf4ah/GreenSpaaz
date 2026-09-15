@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://greenspanzindia.vercel.app/sitemap.xml

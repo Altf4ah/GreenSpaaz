@@ -4,13 +4,35 @@ const menuBtn = document.getElementById('menuBtn');
 const views = document.querySelectorAll('.view');
 const menuLinks = document.querySelectorAll('.menu-link');
 
-function showView(name) {
+// Real, bookmarkable paths for each view — helps sharing links and lets each
+// page carry its own title. vercel.json rewrites every path to index.html,
+// and this reads the current path back out on load so /about etc. work.
+const VIEW_ROUTES = {
+  home: { path: '/', title: 'GreenSpanzIndia | Architecture & Design Studio, Kochi Kerala' },
+  about: { path: '/about', title: 'About | GreenSpanzIndia' },
+  work: { path: '/work', title: 'Projects | GreenSpanzIndia' },
+  contact: { path: '/contact', title: 'Contact | GreenSpanzIndia' }
+};
+
+function showView(name, { pushState = true } = {}) {
+  const route = VIEW_ROUTES[name] || VIEW_ROUTES.home;
+
   views.forEach(v => v.classList.toggle('is-active', v.dataset.view === name));
   menuLinks.forEach(l => l.classList.toggle('is-current', l.dataset.nav === name));
   document.documentElement.classList.toggle('view-open', name !== 'home');
   if (name !== 'home') window.scrollTo(0, 0);
   appEl.classList.remove('menu-open');
   menuBtn.setAttribute('aria-expanded', 'false');
+
+  document.title = route.title;
+  if (pushState && window.location.pathname !== route.path) {
+    history.pushState({ view: name }, '', route.path);
+  }
+}
+
+function viewNameFromPath(path) {
+  const match = Object.entries(VIEW_ROUTES).find(([, r]) => r.path === path);
+  return match ? match[0] : 'home';
 }
 
 document.querySelectorAll('[data-nav]').forEach(el => {
@@ -19,6 +41,13 @@ document.querySelectorAll('[data-nav]').forEach(el => {
     showView(el.dataset.nav);
   });
 });
+
+window.addEventListener('popstate', () => {
+  showView(viewNameFromPath(window.location.pathname), { pushState: false });
+});
+
+// Show the correct view on first load (e.g. someone opens /work directly)
+showView(viewNameFromPath(window.location.pathname), { pushState: false });
 
 menuBtn.addEventListener('click', () => {
   const isOpen = appEl.classList.toggle('menu-open');
@@ -140,3 +169,62 @@ document.addEventListener('keydown', (e) => {
   closeProjectModal();
   closeFilterOverlay();
 });
+
+// ----- Request a quote form -----
+// Builds a pre-filled email to the studio address — no backend needed.
+// To switch to a real form backend later (so it doesn't rely on the visitor's
+// own mail app), sign up at https://formspree.io, replace this handler with a
+// fetch() POST to your form endpoint, and keep the honeypot field as-is.
+const quoteForm = document.getElementById('quoteForm');
+const quoteStatus = document.getElementById('quoteStatus');
+const STUDIO_EMAIL = 'althafahmed071@gmail.com';
+
+if (quoteForm) {
+  quoteForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Honeypot: real visitors never see or fill this field
+    const honeypot = quoteForm.querySelector('#companySite').value.trim();
+    if (honeypot !== '') {
+      // Silently drop likely bot submissions without any error shown
+      quoteForm.reset();
+      return;
+    }
+
+    const name = quoteForm.qName.value.trim();
+    const email = quoteForm.qEmail.value.trim();
+    const phone = quoteForm.qPhone.value.trim();
+    const type = quoteForm.qType.value;
+    const message = quoteForm.qMessage.value.trim();
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name || !email || !message) {
+      quoteStatus.textContent = 'Please fill in your name, email and a short message.';
+      quoteStatus.classList.add('is-error');
+      return;
+    }
+
+    if (!emailPattern.test(email)) {
+      quoteStatus.textContent = 'That email address doesn\u2019t look right — please double-check it.';
+      quoteStatus.classList.add('is-error');
+      return;
+    }
+
+    const subject = `New project request from ${name}`;
+    const bodyLines = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      phone ? `Phone: ${phone}` : null,
+      `Project type: ${type}`,
+      '',
+      message
+    ].filter(Boolean);
+
+    const mailtoUrl = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+    quoteStatus.classList.remove('is-error');
+    quoteStatus.textContent = 'Opening your email app to send this...';
+    window.location.href = mailtoUrl;
+  });
+}
